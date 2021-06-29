@@ -86,13 +86,15 @@
         #tip-image-container {
             position: absolute;
             z-index: 97;
-            width: 250px;
-            height: 250px;
+            width: auto; /*//250px; */
+            height: auto; /*//250px; */
             background-color: rgba(255, 255, 255, 1.0);
             filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 1.0));
             pointer-events: none;
             opacity: 0.0;
             transition: opacity 1.0s ease-out;
+            max-width: 500;
+            /* max-height: 500; */
         }
 
         #tip-image-container.smiles {
@@ -111,8 +113,8 @@
             border: 2px solid #eee;
             width: auto;
             height: auto;
-            max-width: 500px;
-            max-height: 500px;
+            max-width: 500;
+            /* max-height: 500; */
             color: #222222;
             font-family: 'Open Sans';
             font-size: 0.75em;
@@ -127,8 +129,10 @@
         }
 
         #tip-image {
-            width: 250px;
-            height: 250px;
+            width: auto; /*//250px; */
+            height: auto; /*//250px; */
+            max-width: 500;
+            /* max-height: 500; */
             pointer-events: none;
             filter: drop-shadow(0px 0px 5px rgba(255, 255, 255, 1.0));
         }
@@ -557,6 +561,7 @@
 
             for (let name in meta.tree) {
                 updateText('loader', 'Loading "' + name + '" ...');
+                console.log('Loading Tree:'+name)
                 let x = await get_values(name, 'x');
                 let y = await get_values(name, 'y');
                 let z = await get_values(name, 'z');
@@ -885,7 +890,9 @@
                 y -= tip.offsetHeight;
             else
                 y += 10;
-
+            
+            x = (window.innerWidth / 2) - (tip.offsetWidth / 2)
+            
             if (tip) {
                 tip.style.top = y + 'px';
                 tip.style.left = x + 'px';
